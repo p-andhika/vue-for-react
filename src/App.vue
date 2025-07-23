@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 
 // 'ref' for simpler data
 const product = ref("Socks");
@@ -21,6 +21,16 @@ const product = ref("Socks");
 </script>
 
 <template>
-  <h1>{{ product }}</h1>
-  <!-- <h1>{{ product2.name }}</h1> -->
+  <div class="nav-bar"></div>
+  <div class="product-display">
+    <div class="product-container">
+      <div class="product-image">
+        <!-- image goes here -->
+      </div>
+
+      <div class="product-info">
+        <h1>{{ product }}</h1>
+      </div>
+    </div>
+  </div>
 </template>
