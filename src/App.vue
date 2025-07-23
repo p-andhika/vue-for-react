@@ -1,26 +1,35 @@
 <script setup>
-import { ref } from "vue";
-import socksGreenImage from './assets/images/socks_green.jpeg'
-import socksBlueImage from './assets/images/socks_blue.jpeg'
+import { ref, computed } from "vue";
+import socksGreenImage from "./assets/images/socks_green.jpeg";
+import socksBlueImage from "./assets/images/socks_blue.jpeg";
 
 // 'ref' for simpler data
 const product = ref("Socks");
-const image = ref(socksGreenImage);
-const inStock = ref(true)
-const details = ref(['50% cotton', '30% wool', '20% polyester'])
+const brand = ref("Vue Mastery");
+const selectedVariant = ref(0);
+const inStock = ref(true);
+const details = ref(["50% cotton", "30% wool", "20% polyester"]);
 const variants = ref([
-  {id: 2234, color: 'green', image: socksGreenImage},
-  {id: 2235, color: 'blue', image: socksBlueImage}
-])
-const cart = ref(0)
+  { id: 2234, color: "green", image: socksGreenImage },
+  { id: 2235, color: "blue", image: socksBlueImage },
+]);
+const cart = ref(0);
+
+const title = computed(() => {
+  return `${brand.value} ${product.value}`;
+});
+
+const image = computed(() => {
+  return variants.value[selectedVariant.value].image;
+});
 
 const addToCart = () => {
-  cart.value += 1
-}
+  cart.value += 1;
+};
 
-const updateImage = (variantImage) => {
-  image.value = variantImage
-}
+const updateVariant = (index) => {
+  selectedVariant.value = index;
+};
 
 // 'reactive' for big and complex data
 // const product2 = reactive({
@@ -44,24 +53,23 @@ const updateImage = (variantImage) => {
   <div class="product-display">
     <div class="product-container">
       <div class="product-image">
-        <img :src="image"
+        <img :src="image" />
       </div>
 
       <div class="product-info">
-        <h1>{{ product }}</h1>
+        <h1>{{ title }}</h1>
         <p v-if="inStock">In Stock</p>
         <p v-else>Out Stock</p>
         <ul>
           <li v-for="detail in details">{{ detail }}</li>
         </ul>
         <div
-          v-for="variant in variants"
+          v-for="(variant, index) in variants"
           :key="variant.id"
-          v-on:mouseover="updateImage(variant.image)"
+          v-on:mouseover="updateVariant(index)"
           class="color-circle"
           :style="{ backgroundColor: variant.color }"
-        >
-        </div>
+        ></div>
         <button
           class="button"
           :class="{ disabledButton: !inStock }"
