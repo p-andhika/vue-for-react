@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from "vue";
+import socksGreenImage from './assets/images/socks_green.jpeg'
 
 // 'ref' for simpler data
 const product = ref("Socks");
+const image = ref(socksGreenImage);
 
 // 'reactive' for big and complex data
 // const product2 = reactive({
@@ -25,7 +27,7 @@ const product = ref("Socks");
   <div class="product-display">
     <div class="product-container">
       <div class="product-image">
-        <!-- image goes here -->
+        <img :src="image"
       </div>
 
       <div class="product-info">
