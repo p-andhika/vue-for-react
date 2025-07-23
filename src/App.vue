@@ -5,6 +5,7 @@ import socksGreenImage from './assets/images/socks_green.jpeg'
 // 'ref' for simpler data
 const product = ref("Socks");
 const image = ref(socksGreenImage);
+const inStock = ref(true)
 
 // 'reactive' for big and complex data
 // const product2 = reactive({
@@ -32,6 +33,8 @@ const image = ref(socksGreenImage);
 
       <div class="product-info">
         <h1>{{ product }}</h1>
+        <p v-if="inStock">In Stock</p>
+        <p v-else>Out Stock</p>
       </div>
     </div>
   </div>
